@@ -11,7 +11,7 @@ gulp.task('build', function() {
     b.add(config.appPath);
     b.transform(hbsfy);
     var controllerFile = config.app + '_controller.js';
-    var controllerPath = path.join(__dirname, '../', 'controllers/' + controllerFile);
+    var controllerPath = path.join(__dirname, '', 'controllers/' + controllerFile);
     if (fs.existsSync(controllerPath)) {
         b.require(controllerPath, {expose: 'controllers/' + controllerFile.replace('.js', '')});
     }

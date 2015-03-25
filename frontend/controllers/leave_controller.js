@@ -1,8 +1,9 @@
 'use strict';
 
-var Chaplin = require('chaplin');
-//    SiteView = require('../views/site_view');
-//    HeaderView = require('../views/partials/header');
+var Chaplin = require('chaplin'),
+    SiteView = require('../views/site_view'),
+    HeaderView = require('../views/partials/header'),
+    FooterView = require('../views/partials/footer');
 
 var LeaveController = Chaplin.Controller.extend({
 // Set up the site view and the headers and footers
@@ -11,11 +12,10 @@ var LeaveController = Chaplin.Controller.extend({
         console.log('initialize called');
     },
     beforeAction: function(params, route, options) {
-        console.log('beforeAction called');
         Chaplin.Controller.prototype.beforeAction.call(this);
-//        this.reuse('site', SiteView);
-//        this.reuse('header', HeaderView);
-//        this.reuse('footer', FooterView);
+        this.reuse('site', SiteView);
+        this.reuse('header', HeaderView);
+        this.reuse('footer', FooterView);
     },
     index: function(params, route, options) {
         console.log('index called');
