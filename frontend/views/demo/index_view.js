@@ -1,15 +1,12 @@
 'use strict';
-
 var $ = require('jquery'),
     _ = require('underscore'),
     Datepicker = require('jquery-ui/datepicker'),
-    // TokenField = require('bootstrap-tokenfield'),
     tokeninput = require('../../libs/jquery.tokeninput'),
     Chaplin = require('chaplin'),
-    Fileupload = require('blueimp-file-upload'),
     TokenizerView = require('../partials/tokenizer'),
+    FileuploadView = require('../partials/fileupload'),
     template = require('../../templates/demo/index.hbs');
-
 var els = {
     datePicker: '#date',
     dialogMessage: '#dialog-message',
@@ -19,11 +16,13 @@ var els = {
 var IndexView = Chaplin.View.extend({
     template: template,
     region: 'content',
+    modelNew: {},
     events: {
         'click #date': 'openDatepicker'
     },
     initialize: function(options) {
         Chaplin.View.prototype.initialize.call(this);
+        this.listenTo('change', this.modelNew, this.changed);
     },
     render: function(options) {
         Chaplin.View.prototype.render.call(this);
@@ -54,27 +53,23 @@ var IndexView = Chaplin.View.extend({
         this.subview('tokenizer', new TokenizerView(options));
     },
     setupFileUpload: function() {
-        this.$(els.artupload).fileupload({
-            url: 'data.php',
-            maxFileSize: 104857600,
-            acceptFileTypes: '/(.|\/)(tif|jpe?g|tiff)$/i',
-            done: function(e, data) {
-                console.log(data, 'done');
-                $.each(data.result, function(index, file) {
-                    console.log(index, file);
-//                    $('<p/>').text(file.name).appendTo(document.body);
-                });
+        this.modelNew.imageSrc = '';
+        var options = {
+            els: this.$(els.artupload),
+            formData: {
+                assetType: 1,
+                pm: 1
             },
-            add: function(e, data) {
-                console.log(data, 'add');
-                $("#uploadBtn").off('click').on('click', function() {
-                    data.submit();
-                });
-            }
-        });
+            modelNew: this.modelNew
+        };
+        this.subview('tokenizer', new FileuploadView(options));
+        console.log(this.modelNew);
     },
     openDatepicker: function() {
         this.$(els.datePicker).datepicker();
+    },
+    changed: function() {
+        console.log(this.modelNew, 'changed');
     },
     getTemplateData: function() {
         var data = Chaplin.View.prototype.getTemplateData.call(this);
