@@ -1,4 +1,4 @@
-/* 
+/*
     Created on : 25 Mar, 2015, 10:59:26 PM
     Author     : Narendra Singh
 */
@@ -21,10 +21,17 @@ ul {
     margin: 0px;
     padding: 0px;
 }
-#header, #footer {
-    background-color: #e44d26;
-    border-bottom: 3px solid #f16544;
-    color: #fefefe;
+#header {
+    background-color: #FFFFFF;
+    border-bottom: 3px solid #C32D1F;
+    color: #C32D1F;
+    padding: 12px;
+}
+
+#footer {
+    background-color: #FFFFFF;
+    border-top: 3px solid #C32D1F;
+    color: #C32D1F;
     padding: 12px;
 }
 .left {
@@ -44,7 +51,7 @@ a {
     margin-left: 25px;
 }
 #top-nav ul li a {
-    color: #fefefe;
+    color: #C32D1F;
     font-family: sans-serif;
     font-size: 14px;
     font-weight: bold;

@@ -1,6 +1,6 @@
 var config = module.exports;
 
-config.app = 'leave';
+config.app = 'demo';
 config.devFile = config.app + '.js';
 config.appFile = config.app + '.js';
 config.devPath = '../js/dev';

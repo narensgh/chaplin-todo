@@ -57,8 +57,8 @@ var IndexView = Chaplin.View.extend({
         var options = {
             els: this.$(els.artupload),
             formData: {
-                assetType: 1,
-                pm: 1
+                assetType: 'PM_LOGO',
+                uniqueId: 1
             },
             modelNew: this.modelNew
         };
